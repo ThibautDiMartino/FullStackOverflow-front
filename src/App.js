@@ -10,22 +10,23 @@ function App() {
         <h1> Create an account</h1>
         <form>
           <div className="App">
-            <label className="App">
+            <label htmlFor="App">
               Email :
+              <input type="text" name="name" />
             </label>
-            <input type="text" name="name" />
+
           </div>
           <div className="App">
-            <label className="App">
+            <label htmlFor="App">
               Password :
+              <input type="text" name="name" />
             </label>
-            <input type="text" name="name" />
           </div>
           <div>
-            <label className="App">
+            <label htmlFor="App">
               Confirm Password :
+              <input type="text" name="name" />
             </label>
-            <input type="text" name="name" />
           </div>
           <div>
             <input type="submit" value="Create" />
