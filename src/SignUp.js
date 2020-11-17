@@ -1,28 +1,28 @@
 import React from 'react';
 import './App.css';
 
-function Register() {
+function SignUp() {
   return (
-    <div className="Register">
+    <div className="SignUp">
       <body className="App-form">
 
         <h1> Create an account</h1>
         <form>
-          <div className="Register">
-            <label htmlFor="Register">
+          <div className="SignUp">
+            <label htmlFor="SignUp">
               Email :
               <input type="text" name="name" />
             </label>
 
           </div>
-          <div className="Register">
-            <label htmlFor="Register">
+          <div className="SignUp">
+            <label htmlFor="SignUp">
               Password :
               <input type="text" name="name" />
             </label>
           </div>
           <div>
-            <label htmlFor="Register">
+            <label htmlFor="SignUp">
               Confirm Password :
               <input type="text" name="name" />
             </label>
@@ -37,4 +37,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default SignUp;

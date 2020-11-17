@@ -1,37 +1,21 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import './App.css';
+import noughtsAndCrosses from './images/game.png';
 
 function App() {
   return (
     <div className="App">
       <body className="App-form">
-
-        <h1> Create an account</h1>
-        <form>
-          <div className="App">
-            <label htmlFor="App">
-              Email :
-              <input type="text" name="name" />
-            </label>
-
-          </div>
-          <div className="App">
-            <label htmlFor="App">
-              Password :
-              <input type="text" name="name" />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="App">
-              Confirm Password :
-              <input type="text" name="name" />
-            </label>
-          </div>
-          <div>
-            <input type="submit" value="Create" />
-          </div>
-        </form>
+        <div className="topnav">
+          <a className="active" href="#home">Home</a>
+          <a href="#news">Sign Up</a>
+          <a href="#contact">Log In</a>
+        </div>
+        <h1> Welcome to Oh Damn!</h1>
+        <p> Please Sign Up or Log In to play</p>
+        {/* eslint-disable global-require */}
+        <img src={noughtsAndCrosses} alt="morpion game" className="fit-picture" />
       </body>
 
     </div>

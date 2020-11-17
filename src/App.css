@@ -1,26 +1,13 @@
 .App {
   text-align: center;
   white-space: pre-line;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  background-color: #2e56ad;
 }
 
 .App-form {
-  background-color: #282c34;
   min-height: 100vh;
-  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -29,11 +16,44 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.buttton {
+  background-color: white;
+  font-size: 10px 24px;
+  border-radius: 12%;
+  border: 2px solid #36374e;
+}
+
+.fit-picture {
+  margin-top: 10%;
+  width: 500px;
+  border-radius: 25%;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: rgb(37, 37, 37);
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 0 2vw;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: rgb(87, 76, 76);
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #2d3041;
+  color: white;
 }
