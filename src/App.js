@@ -1,17 +1,46 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
+import {
+  Link,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import './App.css';
-import noughtsAndCrosses from './images/game.png';
+import noughtsAndCrosses from './images/game.jpg';
+import SignUp from './SignUp';
 
 function App() {
   return (
     <div className="App">
       <body className="App-form">
-        <div className="topnav">
-          <a className="active" href="#home">Home</a>
-          <a href="#news">Sign Up</a>
-          <a href="#contact">Log In</a>
-        </div>
+        <Router>
+          <div>
+            <ul className="topnav">
+              <li className="active">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="right">
+                <Link to="/signup">Sign Up</Link>
+              </li>
+              <li className="right">
+                <Link to="/login">Log In</Link>
+              </li>
+            </ul>
+
+            <Switch>
+              <Route path="/">
+                <Home />
+              </Route>
+              <Route path="/signup">
+                <SignIn />
+              </Route>
+              <Route path="/login">
+                <LogIn />
+              </Route>
+
+            </Switch>
+          </div>
+        </Router>
         <h1> Welcome to Oh Damn!</h1>
         <p> Please Sign Up or Log In to play</p>
         {/* eslint-disable global-require */}
@@ -20,6 +49,18 @@ function App() {
 
     </div>
   );
+}
+
+function Home() {
+  return App;
+}
+
+function SignIn() {
+  return SignUp;
+}
+
+function LogIn() {
+  return <h2>LogIn</h2>;
 }
 
 export default App;
