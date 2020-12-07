@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import noughtsAndCrosses from './images/game.jpg';
-import SignUp from './SignUp';
+// import SignUp from './SignUp';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Router>
           <div>
             <ul className="topnav">
-              <li className="active">
+              <li>
                 <Link to="/">Home</Link>
               </li>
               <li className="right">
@@ -32,7 +32,7 @@ function App() {
                 <Home />
               </Route>
               <Route path="/signup">
-                <SignIn />
+                <SignUp />
               </Route>
               <Route path="/login">
                 <LogIn />
@@ -41,10 +41,6 @@ function App() {
             </Switch>
           </div>
         </Router>
-        <h1> Welcome to Oh Damn!</h1>
-        <p> Please Sign Up or Log In to play</p>
-        {/* eslint-disable global-require */}
-        <img src={noughtsAndCrosses} alt="morpion game" className="fit-picture" />
       </body>
 
     </div>
@@ -52,11 +48,23 @@ function App() {
 }
 
 function Home() {
-  return App;
+  //  return App;
+  // console.log('Home');
+  // return <h2>Home</h2>;
+  return (
+    <body>
+      <h1> Welcome to Oh Damn!</h1>
+      <p> Please Sign Up or Log In to play</p>
+      {/* eslint-disable global-require */}
+      <img src={noughtsAndCrosses} alt="morpion game" className="fit-picture" />
+    </body>
+
+  );
 }
 
-function SignIn() {
-  return SignUp;
+function SignUp() {
+  //  return SignUp;
+  return <h2>SignUp</h2>;
 }
 
 function LogIn() {
