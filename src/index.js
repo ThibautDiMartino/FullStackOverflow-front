@@ -1,17 +1,32 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import registerServiceWorker from './registerServiceWorker';
+
+import Home from './pages';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
+import NotFound from './pages/NotFound';
 
 ReactDOM.render(
   <Router>
-    <Route path="/" component={App} />
+    {/* All our Routes goes here! */}
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/404" component={NotFound} />
+      <Route exact path="/signup" component={SignUp} />
+      <Route exact path="/login" component={LogIn} />
+      <Redirect to="/404" />
+    </Switch>
   </Router>,
   document.getElementById('root'),
 );
+
 // registerServiceWorker();
 
 // If you want to start measuring performance in your app, pass a function
