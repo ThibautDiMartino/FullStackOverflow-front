@@ -7,7 +7,7 @@ import '../index.css';
 function NotFound() {
   return (
     <div className="App 404">
-      <Header />
+      <Header info="index" />
       <div className="nf-wrapper">
         <div className="nf-inner">
           <h1>404</h1>

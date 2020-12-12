@@ -11,6 +11,9 @@ import reportWebVitals from './reportWebVitals';
 import Home from './pages';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import Dashboard from './pages/Dashboard';
+import morpion from './pages/games/morpion';
+import stick from './pages/games/stick';
 import NotFound from './pages/NotFound';
 
 ReactDOM.render(
@@ -21,6 +24,9 @@ ReactDOM.render(
       <Route exact path="/404" component={NotFound} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/login" component={LogIn} />
+      <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/morpion" component={morpion} />
+      <Route exact path="/stick" component={stick} />
       <Redirect to="/404" />
     </Switch>
   </Router>,
