@@ -103,8 +103,12 @@ function Header({info, gender}) {
             <div className="profile-wrapper">
               <div className="profile-pic">
                 <label htmlFor="upload-pic">
-                  <img src={po === '' ? pp : po} alt="Profile pic" />
-                  <FontAwesomeIcon icon={faCamera} style={{ position: 'relative', left: 15, zIndex: 1 }} />
+                  <div className="upload-pic-overlay" id="upload-pic-overlay">Change profile pic</div>
+                  <div
+                    className="profile-pic-wrapper"
+                    style={{ backgroundImage: `url(${po === '' ? pp : po})` }}
+                  />
+                  <FontAwesomeIcon className="cam-icon" id="cam-icon" icon={faCamera} />
                   <input type="file" id="upload-pic" multiple accept=".jpg, .png, jpeg" />
                 </label>
               </div>
