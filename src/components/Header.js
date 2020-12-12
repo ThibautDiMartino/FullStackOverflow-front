@@ -103,12 +103,12 @@ function Header({info, gender}) {
             <div className="profile-wrapper">
               <div className="profile-pic">
                 <label htmlFor="upload-pic">
-                  <div className="upload-pic-overlay" id="upload-pic-overlay">Change profile pic</div>
+                  <FontAwesomeIcon className="cam-icon" icon={faCamera} />
+                  <div className="upload-pic-overlay">Change profile pic</div>
                   <div
                     className="profile-pic-wrapper"
                     style={{ backgroundImage: `url(${po === '' ? pp : po})` }}
                   />
-                  <FontAwesomeIcon className="cam-icon" id="cam-icon" icon={faCamera} />
                   <input type="file" id="upload-pic" multiple accept=".jpg, .png, jpeg" />
                 </label>
               </div>
@@ -161,28 +161,28 @@ function Header({info, gender}) {
           <ul className={`dropdown ${drop}`}>
             <li>
               <button className="drop-link" type="button" onClick={showProfile}>
-                <FontAwesomeIcon icon={faUser} style={{ color: 'white', marginRight: 10, fontSize: 30 }} />
+                <FontAwesomeIcon className="icon-drop" icon={faUser} />
                 <span>Profile</span>
               </button>
             </li>
             <li>
-              <Link to="/dashboard">
+              <Link className="link-drop" to="/dashboard">
                 <button type="button">
-                  <FontAwesomeIcon icon={faTable} style={{ color: 'white', marginRight: 10, fontSize: 30 }} />
+                  <FontAwesomeIcon className="icon-drop" icon={faTable} />
                   <span>Dashboard</span>
                 </button>
               </Link>
             </li>
             <li>
               <button type="button" className="drop-link" onClick={showsettings}>
-                <FontAwesomeIcon icon={faCog} style={{ color: 'white', marginRight: 10, fontSize: 30 }} />
+                <FontAwesomeIcon className="icon-drop" icon={faCog} />
                 <span>Settings</span>
               </button>
             </li>
             <li>
-              <Link to="/">
+              <Link className="link-drop" to="/">
                 <button type="button">
-                  <FontAwesomeIcon icon={faSignOutAlt} style={{ color: 'white', marginRight: 10, fontSize: 30 }} />
+                  <FontAwesomeIcon className="icon-drop" icon={faSignOutAlt} />
                   <span>Log out</span>
                 </button>
               </Link>
