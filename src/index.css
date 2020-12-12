@@ -167,7 +167,7 @@ a {
 #settings {
   display: none;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 49px;
   background: rgba(0, 0, 0, 0.5);
   border: 0;
@@ -194,6 +194,8 @@ a {
 #profile .page-wrapper,
 #settings .page-wrapper {
   background: inherit;
+  min-height: calc(100% - 21px);
+  height: calc(100% - 21px);
 }
 
 #profile .page-inner,
@@ -222,7 +224,111 @@ a {
 
 .profile-pic img {
   width: 150px;
+  position: relative;
   margin: 10px auto;
+  top: 130px;
+  left: 40px;
+}
+
+.profile-pic label {
+  position: relative;
+  top: -130px;
+  right: 30px;
+}
+
+#upload-pic {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  z-index: -1;
+}
+
+label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+.profile-infos {
+  margin: 20px auto;
+  width: 70%;
+}
+
+.profile-infos input[type=email],
+.profile-infos input[type=password],
+.profile-infos input[type=text] {
+  min-width: 100px;
+}
+
+.profile-update {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-update .edit.deactivate,
+.profile-update .cancel.deactivate {
+  display: none;
+}
+
+.profile-update input[type=button] {
+  width: 35%;
+  border-radius: 25px;
+
+}
+
+.profile-update .save.deactivate {
+  cursor: default;
+  background: grey;
+  color: black;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin: auto;
+  /* right: -15px;
+  top: 3px; */
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 2.4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch input:checked+.slider {
+  background-color: #2196F3;
+}
+
+.switch input:checked+.slider:before {
+  -webkit-transform: translateX(11px);
+  -ms-transform: translateX(11px);
+  transform: translateX(11px);
 }
 
 /* 
@@ -383,7 +489,7 @@ input[type=button] {
 
 .page-wrapper {
   background: #cdd4db;
-  height: 81.3vh;
+  min-height: 81.3vh;
   padding: 10px 25px;
 }
 

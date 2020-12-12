@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faCamera,
   faCog,
   faSignOutAlt,
   faTable,
@@ -17,7 +18,13 @@ import po from '../images/po.jpg';
 function Header({info, gender}) {
 
   const [drop, setDrop] = useState('');
+
   const [profile, setProfile] = useState('');
+  const [cancel, setCancel] = useState('deactivate');
+  const [edit, setEdit] = useState('');
+  const [fieldUpdate, setFieldUpdate] = useState('disabled');
+  const [save, setSave] = useState('deactivate');
+
   const [settings, setSettings] = useState('');
 
   function NotLoggedHeader() {
@@ -59,6 +66,24 @@ function Header({info, gender}) {
     }
   }
 
+  function saveProfile() {
+    return 0;
+  }
+
+  function onEdit() {
+    if (cancel === 'deactivate' && edit === '') {
+      setFieldUpdate('');
+      setSave('');
+      setCancel('');
+      setEdit('deactivate');
+    } else {
+      setSave('deactivate');
+      setCancel('deactivate');
+      setEdit('');
+      setFieldUpdate('disabled');
+    }
+  }
+
   function showsettings() {
     if (settings === '') {
       setSettings('active');
@@ -77,7 +102,21 @@ function Header({info, gender}) {
           <div className="page-inner">
             <div className="profile-wrapper">
               <div className="profile-pic">
-                <img src={po === '' ? pp : po} alt="Profile pic" />
+                <label htmlFor="upload-pic">
+                  <img src={po === '' ? pp : po} alt="Profile pic" />
+                  <FontAwesomeIcon icon={faCamera} style={{ position: 'relative', left: 15, zIndex: 1 }} />
+                  <input type="file" id="upload-pic" multiple accept=".jpg, .png, jpeg" />
+                </label>
+              </div>
+              <div className="profile-infos">
+                <input type="email" placeholder="Email" value="thibaut.dimartino@epitech.eu" disabled={fieldUpdate} />
+                <input type="password" placeholder="Password" value="********" disabled={fieldUpdate} />
+                <input type="text" placeholder="Nickname" value="Snass" disabled={fieldUpdate} />
+                <div className="profile-update">
+                  <input type="button" value="Save" className={`save ${save}`} onClick={saveProfile} />
+                  <input type="button" value="Edit" className={`edit ${edit}`} onClick={onEdit} />
+                  <input type="button" value="Cancel" className={`cancel ${cancel}`} onClick={onEdit} />
+                </div>
               </div>
             </div>
           </div>
@@ -94,7 +133,10 @@ function Header({info, gender}) {
         </button>
         <div className="page-wrapper">
           <div className="page-inner">
-            <span>lol</span>
+            <label className="switch" htmlFor="dark">
+              <input type="checkbox" id="dark" />
+              <span className="slider round"> </span>
+            </label>
           </div>
         </div>
       </div>
