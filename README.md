@@ -37,7 +37,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Deployment
 
-The deployment is maid with Heroku. The website is accessible with the following link :
+The deployment is made with Heroku. The website is accessible with the following link :
 https://dashboard.heroku.com/apps/fullstack-overflo-front/resources
 
 To deploy use the remote heroku as follow : `git push heroku main`
