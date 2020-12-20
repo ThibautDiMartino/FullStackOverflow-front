@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="App">
       <body className="loginbg">
-        <Header />
+        <Header info="index" gender="" />
         <h1> Welcome to Oh Damn!</h1>
         <p> Please Sign Up or Log In to play</p>
         {/* eslint-disable global-require */}

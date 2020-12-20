@@ -12,6 +12,7 @@
 }
 
 body {
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -36,7 +37,7 @@ li {
 }
 
 a {
-  color: #0093DB;
+  color: #0093db;
 }
 
 /* 
@@ -52,6 +53,7 @@ a {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  height: 50px;
 }
 
 /* Style the links inside the navigation bar */
@@ -75,6 +77,311 @@ a {
 .topnav a.active {
   background-color: #2d3041;
   color: white;
+}
+
+.topnav .user-icon {
+  width: 30px;
+  border-radius: 50%;
+  margin: 7px 15px;
+  cursor: pointer;
+}
+
+.topnav button {
+  background: rgb(37, 37, 37);
+  border: 0;
+  color: white;
+  flex: 1;
+  font-size: 17px;
+  font-family: inherit;
+  text-align: left;
+}
+
+.topnav button:hover,
+.topnav a:hover button,
+.topnav li:hover > .drop-link > .icon-drop,
+.topnav li:hover > .link-drop > button > .icon-drop {
+  color: #000000;
+  background: inherit;
+}
+
+.topnav .dropdown {
+  display: none;
+  opacity: 0;
+  flex-direction: column;
+  position: absolute;
+  background: rgb(37, 37, 37);
+  right: 0;
+  z-index: 2;
+  transition: ease 1s;
+  padding-left: 0;
+  top: 50px;
+}
+
+.topnav .dropdown.active {
+  display: flex;
+  opacity: 1;
+}
+
+.dropdown .icon-drop {
+  color: white;
+  margin-right: 10px;
+  font-size: 30px;
+}
+
+.dropdown button,
+.dropdown li,
+.dropdown a {
+  cursor: pointer;
+}
+
+.dropdown li {
+  margin: auto;
+}
+
+.dropdown .drop-link {
+  width: 204px;
+}
+
+.dropdown a,
+.dropdown .drop-link {
+  float: left;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 0;
+  padding: 22px 32px;
+}
+
+.dropdown li:hover,
+.dropdown li:hover a,
+.dropdown li:hover button {
+  background-color: #ddd;
+  color: #000000;
+}
+
+.dropdown button {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.dropdown span {
+  text-align: left;
+  flex: 1;
+  margin: auto;
+  width: 100px;
+}
+
+#profile,
+#settings {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  top: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  height: 84.9vh;
+  width: 100%;
+}
+
+#profile.active,
+#settings.active {
+  display: block;
+}
+
+.exit-modal {
+  position: absolute;
+  color: #000000;
+  font-size: 30px;
+  cursor: pointer;
+  top: 30px;
+  right: 350px;
+  border: 0;
+  background: white;
+}
+
+#profile .page-wrapper,
+#settings .page-wrapper {
+  background: inherit;
+  min-height: calc(100% - 21px);
+  height: calc(100% - 21px);
+}
+
+#profile .page-inner,
+#settings .page-inner {
+  background: white;
+  width: 50%;
+  height: calc(100% - 10px);
+  margin: auto;
+  padding: 5px 0;
+  border-radius: 25px;
+}
+
+.profile-wrapper,
+.settings-wrapper {
+  width: 100%;
+}
+
+.profile-pic {
+  width: 100%;
+  margin: 0 auto;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 50% 50%;
+}
+
+.profile-pic-wrapper {
+  height: inherit;
+  position: absolute;
+  width: inherit;
+  border-radius: inherit;
+  background-size: cover;
+  z-index: 0;
+  top: 35px;
+  background-position: center;
+}
+
+.profile-pic img {
+  width: 150px;
+}
+
+.profile-pic label {
+  height: 150px;
+  display: inline-block;
+  width: 150px;
+  margin: 20px auto;
+  border-radius: 50%;
+}
+
+.profile-pic .upload-pic-overlay {
+  max-height: inherit;
+  max-width: inherit;
+  padding: 35px 25px;
+  height: 73px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: inherit;
+  position: absolute;
+  z-index: 1;
+  flex-wrap: wrap;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: ease 1s;
+  margin: 3px;
+  width: 93px;
+  top: 35px;
+}
+
+.profile-pic .upload-pic-overlay:hover,
+.profile-pic .cam-icon:hover ~ .upload-pic-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  color: white;
+}
+
+#upload-pic {
+  opacity: 0;
+  display: none;
+  position: absolute;
+  z-index: -1;
+}
+
+.profile-pic .cam-icon {
+  position: relative;
+  left: 52px;
+  z-index: 1;
+  top: 18px;
+  opacity: 1 !important;
+}
+
+label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+.profile-infos {
+  margin: 20px auto;
+  width: 70%;
+}
+
+.profile-infos input[type='email'],
+.profile-infos input[type='password'],
+.profile-infos input[type='text'] {
+  min-width: 100px;
+}
+
+.profile-update {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-update .edit.deactivate,
+.profile-update .cancel.deactivate {
+  display: none;
+}
+
+.profile-update input[type='button'] {
+  width: 35%;
+  border-radius: 25px;
+}
+
+.profile-update .save.deactivate {
+  cursor: default;
+  background: grey;
+  color: black;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin: auto;
+  /* right: -15px;
+  top: 3px; */
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 12px;
+  width: 12px;
+  left: 3px;
+  bottom: 2.4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.switch input:checked + .slider {
+  background-color: #2196f3;
+}
+
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(11px);
+  -ms-transform: translateX(11px);
+  transform: translateX(11px);
 }
 
 /* 
@@ -126,7 +433,7 @@ a {
   flex-direction: column;
   justify-content: space-between;
   margin: 20px auto;
-  background: url('./images/game.png') no-repeat center;
+  /* background: url('./images/game.jpg') no-repeat center; */
   background-size: cover;
   height: 70vh;
 }
@@ -140,11 +447,12 @@ a {
   /* flex: 1; */
 }
 
-input[type=email],
-input[type=password],
-input[type=text] {
+input[type='email'],
+input[type='password'],
+input[type='text'],
+.gender {
   border: 0 solid;
-  border-bottom: 3px solid #0093DB;
+  border-bottom: 3px solid #0093db;
   width: 300px;
   margin: 0 auto;
   margin-top: 75px;
@@ -153,10 +461,16 @@ input[type=text] {
   height: 30px;
 }
 
-input[type=password],
-input[type=email],
-input[type=text]  {
+input[type='password'],
+input[type='email'],
+input[type='text'],
+.gender {
   margin-top: 15px;
+}
+
+.gender {
+  width: 330px;
+  height: 43px;
 }
 
 #log-email {
@@ -168,11 +482,11 @@ input[type=text]  {
   display: none;
 }
 
-input[type=button] {
+input[type='button'] {
   margin: 45px auto 0 auto;
   width: 300px;
   color: white;
-  background-color: #0093DB;
+  background-color: #0093db;
   cursor: pointer;
   border: 0;
   padding: 5px 15px;
@@ -199,7 +513,6 @@ input[type=button] {
   height: 92vh;
   font-size: 30px;
   display: flex;
-  justify-content: end;
   flex-direction: row-reverse;
 }
 
@@ -219,6 +532,175 @@ input[type=button] {
 
 .nf-inner small {
   margin: 0;
+}
+
+/* 
+**
+** Dashboard
+**
+*/
+
+.page-wrapper {
+  background: #cdd4db;
+  min-height: 81.3vh;
+  height: 81.5vh;
+  padding: 10px 25px;
+}
+
+.page-inner {
+  background: white;
+  padding: 10px 10px 0 10px;
+  display: flex;
+  height: calc(100% - 10px);
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.page-inner section {
+  width: 33%;
+}
+
+#global-score {
+  text-align: start;
+}
+
+#global-score div {
+  margin: 10px 0;
+}
+
+.coins span,
+.ranking span {
+  font-size: 30px;
+}
+
+#global-score .user-icon {
+  width: 20px;
+}
+
+.game-history {
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+}
+
+.history {
+  width: 100%;
+}
+
+.avatar {
+  margin: 10px auto;
+}
+
+.avatar img {
+  width: 100px;
+}
+
+.game-selector {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.left-arrow,
+.right-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  cursor: pointer;
+  margin: auto;
+}
+
+.left-arrow {
+  border-width: 20px 40px 20px 0;
+  border-color: transparent #000000 transparent transparent;
+}
+
+.right-arrow {
+  border-width: 20px 0 20px 40px;
+  border-color: transparent transparent transparent #000000;
+}
+
+.game-selector img {
+  flex: 1;
+  width: 200px;
+  height: 200px;
+}
+
+.games-wrapper {
+  height: 200px;
+}
+
+.play-btn {
+  width: 100%;
+  height: 50px;
+  flex: 1;
+}
+
+.play-btn input[type='button'] {
+  height: 50px;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.win,
+.lose,
+.draw {
+  width: 0;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.draw {
+  border: 15px solid rgb(66, 165, 245);
+}
+
+.lose {
+  border: 15px solid rgb(255, 112, 67);
+}
+
+.win {
+  border: 15px solid rgb(156, 204, 101);
+}
+
+#stat {
+  height: 400px;
+}
+
+#friends {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 5px 10px 0 10px;
+  box-shadow: 0px -4px 13px -3px #000000;
+  margin-bottom: 0;
+}
+
+#friends div {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.disconnected,
+.connected {
+  overflow: auto;
+}
+
+.disconnected img,
+.connected img {
+  margin: 0 5px;
+}
+
+.disconnected img {
+  opacity: 0.5;
+}
+
+.friend {
+  width: 50px;
+  border-radius: 50%;
 }
 
 /* 
