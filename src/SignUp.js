@@ -7,7 +7,7 @@ function SignUp() {
       <body className="App-form">
 
         <h1> Create an account</h1>
-        <form>
+        <form action="/singnup" method="post">
           <div className="SignUp">
             <label htmlFor="SignUp">
               Email :
@@ -32,8 +32,8 @@ function SignUp() {
           </div>
         </form>
       </body>
-
     </div>
+
   );
 }
 
