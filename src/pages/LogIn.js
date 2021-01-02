@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+function reqListener() {
+  console.log(this.responseText);
+}
+
 window.addEventListener('load', () => {
-  function sendData() {
+  async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
     const object = {};
     let json = {};
     const password = document.getElementById('password');
     const email = document.getElementById('email');
+    // let res = '';
 
     FD.append('email', email.value);
     FD.append('password', password.value);
@@ -20,16 +25,20 @@ window.addEventListener('load', () => {
     XHR.addEventListener('error', () => {
       alert('Oops! Something went wrong.');
     });
-    XHR.open('POST', 'http://localhost:3000/signup');
+    XHR.open('POST', 'localhost:3000/signin/login');
     XHR.setRequestHeader('Content-Type', 'application/json');
     FD.forEach((value, key) => {
       object[key] = value;
     });
     json = JSON.stringify(object);
+    XHR.onload = reqListener;
     XHR.send(json);
+    alert(XHR.responseText);
+    // alert(res);
   }
   const form = document.getElementById('form');
   form.addEventListener('submit', (event) => {
+    alert('test');
     event.preventDefault();
     sendData();
   });
@@ -44,7 +53,9 @@ function LogIn() {
         <form id="form">
           <input type="email" name="email" id="email" placeholder="Email" />
           <input type="password" name="password" id="password" placeholder="Password" />
-          <input type="button" value="Connect" id="submit" />
+          <button type="submit" value="send" id="submit"> send </button>
+
+          {/* <input type="button" value="Connect" id="submit" /> */}
         </form>
         {/* <Link to="/dashboard" id="submit">
           Connect

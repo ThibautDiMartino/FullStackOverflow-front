@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
     XHR.addEventListener('error', () => {
       alert('Oops! Something went wrong.');
     });
-    XHR.open('POST', 'http://localhost:3000/signup');
+    XHR.open('POST', 'http://localhost:3000/signup', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
     FD.forEach((value, key) => {
       object[key] = value;
@@ -37,6 +37,7 @@ window.addEventListener('load', () => {
   }
   const form = document.getElementById('form');
   form.addEventListener('submit', (event) => {
+    alert('test');
     event.preventDefault();
     sendData();
   });
@@ -60,10 +61,10 @@ function SignUp() {
           <input type="password" name="password" id="password" placeholder="Password" />
           <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" />
 
-          <Link to="/dashboard" name="submit" type="submit" id="submmit">
-            <button type="submit" value="send" id="submit"> send </button>
-            {/* Create */}
-          </Link>
+          {/* <Link to="/dashboard" name="submit" type="submit" id="submmit"> */}
+          <button type="submit" value="send" id="submit"> send </button>
+          {/* Create */}
+          {/* </Link> */}
         </form>
         {/* <input type="button" value="Create" /> */}
       </div>
