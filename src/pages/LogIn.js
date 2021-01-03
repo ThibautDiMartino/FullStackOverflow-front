@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Link,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../index.css';
 
 function LogIn() {
   const { t } = useTranslation();
+  const [error, setError] = useState('');
+  const [reqError, setReqError] = useState('');
+
   async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
@@ -20,14 +24,14 @@ function LogIn() {
     FD.append('password', password.value);
     XHR.addEventListener('load', (event) => {
       if (event.target.responseText === '[]') {
-        alert(t('userFailed'));
+        setError('active');
       } else {
         window.location.href = 'https://fullstackoverflow-back.herokuapp.com/dashboard';
       }
       return event;
     });
     XHR.addEventListener('error', () => {
-      alert(t('requestError'));
+      setReqError('active');
     });
     XHR.open('POST', 'https://fullstackoverflow-back.herokuapp.com/signin/login', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
@@ -51,8 +55,12 @@ function LogIn() {
           {t('connectAccount')}
         </p>
         <form onSubmit={submit} id="form">
-          <input type="email" name="email" id="email" placeholder="Email" />
-          <input type="password" name="password" id="password" placeholder="Password" />
+          <div className={`error ${error}`}>{t('userFailed')}</div>
+          <div className={`error ${reqError}`}>{t('requestError')}</div>
+          <div className="connectionWrapper">
+            <input type="email" name="email" id="email" placeholder="Email" />
+            <input type="password" name="password" id="password" placeholder="Password" />
+          </div>
           <button
             type="submit"
             value="send"
@@ -72,10 +80,5 @@ function LogIn() {
     </div>
   );
 }
-
-// LogIn.propTypes = {
-//   history: PropTypes.isRequired,
-
-// };
 
 export default LogIn;
