@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 import {
   faCamera,
   faCog,
@@ -16,28 +17,28 @@ import po from '../images/po.jpg';
 
 // eslint-disable-next-line
 function Header({info, gender}) {
-
+  const { t } = useTranslation();
   const [drop, setDrop] = useState('');
-
   const [profile, setProfile] = useState('');
   const [cancel, setCancel] = useState('deactivate');
   const [edit, setEdit] = useState('');
   const [fieldUpdate, setFieldUpdate] = useState('disabled');
   const [save, setSave] = useState('deactivate');
-
   const [settings, setSettings] = useState('');
 
   function NotLoggedHeader() {
     return (
       <ul className="topnav">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            {t('home')}
+          </Link>
         </li>
         <li className="right">
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/signup">{t('signup')}</Link>
         </li>
         <li className="right">
-          <Link to="/login">Log In</Link>
+          <Link to="/login">{t('login')}</Link>
         </li>
       </ul>
     );
@@ -104,7 +105,9 @@ function Header({info, gender}) {
               <div className="profile-pic">
                 <label htmlFor="upload-pic">
                   <FontAwesomeIcon className="cam-icon" icon={faCamera} />
-                  <div className="upload-pic-overlay">Change profile pic</div>
+                  <div className="upload-pic-overlay">
+                    {t('picture')}
+                  </div>
                   <div
                     className="profile-pic-wrapper"
                     style={{ backgroundImage: `url(${po === '' ? pp : po})` }}
@@ -117,9 +120,9 @@ function Header({info, gender}) {
                 <input type="password" placeholder="Password" value="********" disabled={fieldUpdate} />
                 <input type="text" placeholder="Nickname" value="Snass" disabled={fieldUpdate} />
                 <div className="profile-update">
-                  <input type="button" value="Save" className={`save ${save}`} onClick={saveProfile} />
-                  <input type="button" value="Edit" className={`edit ${edit}`} onClick={onEdit} />
-                  <input type="button" value="Cancel" className={`cancel ${cancel}`} onClick={onEdit} />
+                  <input type="button" value={t('save')} className={`save ${save}`} onClick={saveProfile} />
+                  <input type="button" value={t('edit')} className={`edit ${edit}`} onClick={onEdit} />
+                  <input type="button" value={t('cancel')} className={`cancel ${cancel}`} onClick={onEdit} />
                 </div>
               </div>
             </div>
@@ -152,7 +155,9 @@ function Header({info, gender}) {
     return (
       <ul className="topnav">
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            {t('home')}
+          </Link>
         </li>
         <li className="right">
           <button type="button" onClick={showDrop}>
@@ -162,28 +167,36 @@ function Header({info, gender}) {
             <li>
               <button className="drop-link" type="button" onClick={showProfile}>
                 <FontAwesomeIcon className="icon-drop" icon={faUser} />
-                <span>Profile</span>
+                <span>
+                  {t('profile')}
+                </span>
               </button>
             </li>
             <li>
               <Link className="link-drop" to="/dashboard">
                 <button type="button">
                   <FontAwesomeIcon className="icon-drop" icon={faTable} />
-                  <span>Dashboard</span>
+                  <span>
+                    {t('dashboard')}
+                  </span>
                 </button>
               </Link>
             </li>
             <li>
               <button type="button" className="drop-link" onClick={showsettings}>
                 <FontAwesomeIcon className="icon-drop" icon={faCog} />
-                <span>Settings</span>
+                <span>
+                  {t('settings')}
+                </span>
               </button>
             </li>
             <li>
               <Link className="link-drop" to="/">
                 <button type="button">
                   <FontAwesomeIcon className="icon-drop" icon={faSignOutAlt} />
-                  <span>Log out</span>
+                  <span>
+                    {t('logout')}
+                  </span>
                 </button>
               </Link>
             </li>

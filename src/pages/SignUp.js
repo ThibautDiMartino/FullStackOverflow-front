@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
+import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function SignUp() {
+  const { t } = useTranslation();
   async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
@@ -24,13 +26,13 @@ function SignUp() {
     XHR.addEventListener('load', (event) => {
       alert(event.target.responseText);
       if (event.target.responseText === '409: Already exists') {
-        alert('User already exists');
+        alert(t('userExists'));
       } else {
         window.location.href = 'http://localhost:3001/dashboard';
       }
     });
     XHR.addEventListener('error', () => {
-      alert('Oops! Something went wrong.');
+      alert(t('requestError'));
     });
     XHR.open('POST', 'http://localhost:3000/signup', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
@@ -50,24 +52,30 @@ function SignUp() {
     <div className="App">
       <Header info="index" gender="" />
       <div id="connection-form">
-        <p>Create your account:</p>
+        <p>
+          {t('createAccount')}
+        </p>
         <form onSubmit={submit} id="form" name="form">
-          <input type="text" name="firstName" id="firstName" placeholder="First Name" />
-          <input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-          <input type="email" name="email" id="email" placeholder="Email" />
+          <input type="text" name="firstName" id="firstName" placeholder={t('firstname')} />
+          <input type="text" name="lastName" id="lastName" placeholder={t('lastname')} />
+          <input type="email" name="email" id="email" placeholder={t('email')} />
           <select className="gender" name="gender" id="gender">
-            <option selected>Gender</option>
-            <option>Male</option>
-            <option>Female</option>
+            <option selected>{t('gender')}</option>
+            <option>{t('male')}</option>
+            <option>{t('female')}</option>
           </select>
-          <input type="password" name="password" id="password" placeholder="Password" />
-          <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" />
-          <button type="submit" value="send" id="submit"> send </button>
+          <input type="password" name="password" id="password" placeholder={t('password')} />
+          <input type="password" name="confirm-password" id="confirm-password" placeholder={t('confirmPassword')} />
+          <button type="submit" value="send" id="submit">
+            {t('createButton')}
+          </button>
         </form>
       </div>
       <div id="do-acc">
-        Already have an account?
-        <Link to="/login"> Connect</Link>
+        {t('alreadyHaveAccount')}
+        <Link to="/login">
+          {t('connect')}
+        </Link>
       </div>
       <Footer />
     </div>

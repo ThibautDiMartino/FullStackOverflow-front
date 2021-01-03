@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../index.css';
 import noughtsAndCrosses from '../images/game1.png';
+import './i18nextConf';
 
 function Home() {
   return (
