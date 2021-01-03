@@ -1,14 +1,13 @@
 import React from 'react';
 import {
-  // Redirect,
-  // Route,
   Link,
 } from 'react-router-dom';
-// import { Switch } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function LogIn() {
+  const { t } = useTranslation();
   async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
@@ -22,14 +21,14 @@ function LogIn() {
     XHR.addEventListener('load', (event) => {
       alert(event.target.responseText);
       if (event.target.responseText === '[]') {
-        alert('User does\'nt exist or invalid email and password');
+        alert(t('userFailed'));
       } else {
         window.location.href = 'http://localhost:3001/dashboard';
       }
       return event;
     });
     XHR.addEventListener('error', () => {
-      alert('Oops! Something went wrong.');
+      alert(t('requestError'));
     });
     XHR.open('POST', 'http://localhost:3000/signin/login', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
@@ -49,7 +48,9 @@ function LogIn() {
     <div className="App">
       <Header info="index" gender="" />
       <div id="connection-form">
-        <p>Connect to your account:</p>
+        <p>
+          {t('connectAccount')}
+        </p>
         <form onSubmit={submit} id="form">
           <input type="email" name="email" id="email" placeholder="Email" />
           <input type="password" name="password" id="password" placeholder="Password" />
@@ -57,15 +58,16 @@ function LogIn() {
             type="submit"
             value="send"
             id="submit"
-            // onClick={handleClick}
           >
-            Connect
+            {t('connect')}
           </button>
         </form>
       </div>
       <div id="do-acc">
-        Don&apos;t have an account?
-        <Link to="/signup"> Create one</Link>
+        {t('account')}
+        <Link to="/signup">
+          {t('create')}
+        </Link>
       </div>
       <Footer />
     </div>
