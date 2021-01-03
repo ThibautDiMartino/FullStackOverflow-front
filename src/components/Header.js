@@ -14,6 +14,8 @@ import female from '../images/m1.jpg';
 import male from '../images/m2.jpg';
 import pp from '../images/m7.jpg';
 import po from '../images/po.jpg';
+import en from '../images/uk.png';
+import fr from '../images/fr.png';
 
 // eslint-disable-next-line
 function Header({info, gender}) {
@@ -39,8 +41,12 @@ function Header({info, gender}) {
           </Link>
         </li>
         <li>
-          <button type="button" onClick={() => changeLanguage('fr')}>fr</button>
-          <button type="button" onClick={() => changeLanguage('en')}>en</button>
+          <button type="button" onClick={() => changeLanguage('fr')}>
+            <img src={fr} alt="fr flag" className="icon" />
+          </button>
+          <button type="button" onClick={() => changeLanguage('en')}>
+            <img src={en} alt="uk flag" className="icon" />
+          </button>
         </li>
         <li className="right">
           <Link to="/signup">{t('signup')}</Link>

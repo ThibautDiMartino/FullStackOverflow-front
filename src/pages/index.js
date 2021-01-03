@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../index.css';
-import noughtsAndCrosses from '../images/game1.png';
+import chat from '../images/chat.png';
 import './i18nextConf';
 
 function Home() {
@@ -19,7 +19,7 @@ function Home() {
           {t('pleaseSignUp')}
         </p>
         {/* eslint-disable global-require */}
-        <img src={noughtsAndCrosses} alt="morpion game" className="fit-picture" />
+        <img src={chat} alt="morpion game" className="fit-picture" />
         <Footer />
       </body>
     </div>

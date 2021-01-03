@@ -419,6 +419,12 @@ label {
   border-radius: 25%;
 }
 
+.icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 25%;
+}
+
 /* 
 **
 ** Form Signup
