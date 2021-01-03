@@ -27,12 +27,20 @@ function Header({info, gender}) {
   const [settings, setSettings] = useState('');
 
   function NotLoggedHeader() {
+    const { i18n } = useTranslation();
+    const changeLanguage = (lng) => {
+      i18n.changeLanguage(lng);
+    };
     return (
       <ul className="topnav">
         <li>
           <Link to="/">
             {t('home')}
           </Link>
+        </li>
+        <li>
+          <button type="button" onClick={() => changeLanguage('fr')}>fr</button>
+          <button type="button" onClick={() => changeLanguage('en')}>en</button>
         </li>
         <li className="right">
           <Link to="/signup">{t('signup')}</Link>
