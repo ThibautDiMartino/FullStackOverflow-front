@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,9 @@ import Footer from '../components/Footer';
 
 function SignUp() {
   const { t } = useTranslation();
+  const [error, setError] = useState('');
+  const [reqError, setReqError] = useState('');
+
   async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
@@ -25,13 +28,13 @@ function SignUp() {
     FD.append('password', password.value);
     XHR.addEventListener('load', (event) => {
       if (event.target.responseText === '409: Already exists') {
-        alert(t('userExists'));
+        setError('active');
       } else {
         window.location.href = 'http://localhost:3001/dashboard';
       }
     });
     XHR.addEventListener('error', () => {
-      alert(t('requestError'));
+      setReqError('active');
     });
     XHR.open('POST', 'http://localhost:3000/signup', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
@@ -55,6 +58,8 @@ function SignUp() {
           {t('createAccount')}
         </p>
         <form onSubmit={submit} id="form" name="form">
+          <div className={`error ${error}`}>{t('userExists')}</div>
+          <div className={`error ${reqError}`}>{t('requestError')}</div>
           <input type="text" name="firstName" id="firstName" placeholder={t('firstname')} />
           <input type="text" name="lastName" id="lastName" placeholder={t('lastname')} />
           <input type="email" name="email" id="email" placeholder={t('email')} />

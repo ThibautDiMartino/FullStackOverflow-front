@@ -14,6 +14,7 @@ function Dashboard() {
   const [room, setRoom] = useState('');
   const [userName, setUserName] = useState('');
   const [userList, setUserList] = useState([]);
+  const [rooms, setRoomsList] = useState([]);
 
   // After Login
   const [message, setMessage] = useState('');
@@ -30,6 +31,9 @@ function Dashboard() {
     socket.on('receive_user', (data) => {
       setUserList([...userList, data]);
     });
+    socket.on('rooms', (data) => {
+      setRoomsList(data);
+    });
   });
   const connectToRoom = async () => {
     const connection = {
@@ -40,6 +44,7 @@ function Dashboard() {
       },
     };
 
+    setRoom(room);
     setLoggedIn(true);
     await socket.emit('join_room', connection);
     setUserList([...userList, connection.content]);
@@ -66,24 +71,43 @@ function Dashboard() {
         <div className="page-wrapper">
           <div className="page-inner">
             {!loggedIn ? (
-              <div className="logIn">
-                <div className="inputs">
-                  <input
-                    type="text"
-                    placeholder="Name..."
-                    onChange={(e) => {
-                      setUserName(e.target.value);
-                    }}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Room..."
+              <div className="roomSelector">
+                <div className="logIn">
+                  <div className="inputs">
+                    <input
+                      type="text"
+                      placeholder="Name..."
+                      onChange={(e) => {
+                        setUserName(e.target.value);
+                      }}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Room..."
+                      value={room}
+                      onChange={(e) => {
+                        setRoom(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <select
+                    className="rooms"
                     onChange={(e) => {
                       setRoom(e.target.value);
                     }}
-                  />
+                  >
+                    <option selected>Existing Rooms</option>
+                    {rooms.map((element) => (
+                      <option
+                        value={element.room}
+                      >
+                        {element.room}
+                      </option>
+                    ))}
+                  </select>
+
+                  <button type="button" onClick={connectToRoom}>Enter Chat</button>
                 </div>
-                <button type="button" onClick={connectToRoom}>Enter Chat</button>
               </div>
             ) : (
               <div className="roomWrapper">

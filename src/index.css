@@ -449,14 +449,11 @@ label {
   margin: 0 auto;
 }
 
-#connection-form form {
-  /* flex: 1; */
-}
-
 input[type='email'],
 input[type='password'],
 input[type='text'],
-.gender {
+.gender,
+.rooms {
   border: 0 solid;
   border-bottom: 3px solid #0093db;
   width: 300px;
@@ -470,11 +467,13 @@ input[type='text'],
 input[type='password'],
 input[type='email'],
 input[type='text'],
-.gender {
+.gender,
+.rooms {
   margin-top: 15px;
 }
 
-.gender {
+.gender,
+.rooms {
   width: 330px;
   height: 43px;
 }
@@ -488,7 +487,25 @@ input[type='text'],
   display: none;
 }
 
-input[type='button'] {
+#form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.error {
+  display: none;
+  color: red;
+}
+
+.error.active {
+  display: block;
+}
+
+input[type='button'],
+input[type='submit'],
+#form button {
   margin: 45px auto 0 auto;
   width: 300px;
   color: white;
@@ -545,6 +562,10 @@ input[type='button'] {
 ** Dashboard
 **
 */
+
+.roomSelector {
+  margin: auto;
+}
 
 .logIn {
   width: 600px;
