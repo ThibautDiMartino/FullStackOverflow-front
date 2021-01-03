@@ -4,8 +4,8 @@ import '../index.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-window.addEventListener('load', () => {
-  function sendData() {
+function SignUp() {
+  async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
     const object = {};
@@ -23,6 +23,11 @@ window.addEventListener('load', () => {
     FD.append('password', password.value);
     XHR.addEventListener('load', (event) => {
       alert(event.target.responseText);
+      if (event.target.responseText === '409: Already exists') {
+        alert('User already exists');
+      } else {
+        window.location.href = 'http://localhost:3001/dashboard';
+      }
     });
     XHR.addEventListener('error', () => {
       alert('Oops! Something went wrong.');
@@ -35,22 +40,19 @@ window.addEventListener('load', () => {
     json = JSON.stringify(object);
     XHR.send(json);
   }
-  const form = document.getElementById('form');
-  form.addEventListener('submit', (event) => {
-    alert('test');
+
+  function submit(event) {
     event.preventDefault();
     sendData();
-  });
-});
+  }
 
-function SignUp() {
   return (
     <div className="App">
       <Header info="index" gender="" />
       <div id="connection-form">
         <p>Create your account:</p>
-        <form id="form" name="form">
-          <input type="text" name="firstName" id="firstName" placeholder="Fist Name" />
+        <form onSubmit={submit} id="form" name="form">
+          <input type="text" name="firstName" id="firstName" placeholder="First Name" />
           <input type="text" name="lastName" id="lastName" placeholder="Last Name" />
           <input type="email" name="email" id="email" placeholder="Email" />
           <select className="gender" name="gender" id="gender">
@@ -60,13 +62,8 @@ function SignUp() {
           </select>
           <input type="password" name="password" id="password" placeholder="Password" />
           <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" />
-
-          {/* <Link to="/dashboard" name="submit" type="submit" id="submmit"> */}
           <button type="submit" value="send" id="submit"> send </button>
-          {/* Create */}
-          {/* </Link> */}
         </form>
-        {/* <input type="button" value="Create" /> */}
       </div>
       <div id="do-acc">
         Already have an account?
