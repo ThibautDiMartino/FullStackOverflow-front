@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  // Redirect,
+  // Route,
+  Link,
+} from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function reqListener() {
-  console.log(this.responseText);
-}
-
-window.addEventListener('load', () => {
+function LogIn() {
   async function sendData() {
     const FD = new FormData();
     const XHR = new XMLHttpRequest();
@@ -15,52 +15,51 @@ window.addEventListener('load', () => {
     let json = {};
     const password = document.getElementById('password');
     const email = document.getElementById('email');
-    // let res = '';
 
     FD.append('email', email.value);
     FD.append('password', password.value);
     XHR.addEventListener('load', (event) => {
       alert(event.target.responseText);
+      if (event.target.responseText === '[]') {
+        alert('User does\'nt exist or invalid email and password');
+      } else {
+        window.location.href = 'http://localhost:3001/dashboard';
+      }
     });
     XHR.addEventListener('error', () => {
       alert('Oops! Something went wrong.');
     });
-    XHR.open('POST', 'localhost:3000/signin/login');
+    XHR.open('POST', 'http://localhost:3000/signin/login', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
     FD.forEach((value, key) => {
       object[key] = value;
     });
     json = JSON.stringify(object);
-    XHR.onload = reqListener;
     XHR.send(json);
-    alert(XHR.responseText);
-    // alert(res);
   }
-  const form = document.getElementById('form');
-  form.addEventListener('submit', (event) => {
-    alert('test');
+
+  function submit(event) {
     event.preventDefault();
     sendData();
-  });
-});
+  }
 
-function LogIn() {
   return (
     <div className="App">
       <Header info="index" gender="" />
       <div id="connection-form">
         <p>Connect to your account:</p>
-        <form id="form">
+        <form onSubmit={submit} id="form">
           <input type="email" name="email" id="email" placeholder="Email" />
           <input type="password" name="password" id="password" placeholder="Password" />
-          <button type="submit" value="send" id="submit"> send </button>
-
-          {/* <input type="button" value="Connect" id="submit" /> */}
+          <button
+            type="submit"
+            value="send"
+            id="submit"
+            // onClick={handleClick}
+          >
+            Connect
+          </button>
         </form>
-        {/* <Link to="/dashboard" id="submit">
-          Connect
-        </Link> */}
-
       </div>
       <div id="do-acc">
         Don&apos;t have an account?
