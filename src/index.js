@@ -21,12 +21,12 @@ ReactDOM.render(
     {/* All our Routes goes here! */}
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/404" component={NotFound} />
-      <Route exact path="/signup" component={SignUp} />
-      <Route exact path="/login" component={LogIn} />
-      <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/morpion" component={morpion} />
-      <Route exact path="/stick" component={stick} />
+      <Route path="/404" component={NotFound} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/login" component={LogIn} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/morpion" component={morpion} />
+      <Route path="/stick" component={stick} />
       <Redirect to="/404" />
     </Switch>
   </Router>,

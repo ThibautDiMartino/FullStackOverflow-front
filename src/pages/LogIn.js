@@ -4,6 +4,7 @@ import {
   // Route,
   Link,
 } from 'react-router-dom';
+// import { Switch } from '@material-ui/core';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -25,6 +26,7 @@ function LogIn() {
       } else {
         window.location.href = 'http://localhost:3001/dashboard';
       }
+      return event;
     });
     XHR.addEventListener('error', () => {
       alert('Oops! Something went wrong.');
@@ -69,5 +71,10 @@ function LogIn() {
     </div>
   );
 }
+
+// LogIn.propTypes = {
+//   history: PropTypes.isRequired,
+
+// };
 
 export default LogIn;

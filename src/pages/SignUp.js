@@ -5,42 +5,42 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 window.addEventListener('load', () => {
-  function sendData() {
-    const FD = new FormData();
-    const XHR = new XMLHttpRequest();
-    const object = {};
-    let json = {};
-    const firstname = document.getElementById('firstName');
-    const lastname = document.getElementById('lastName');
-    const password = document.getElementById('password');
-    const gender = document.getElementById('gender');
-    const email = document.getElementById('email');
+  // function sendData() {
+  //   const FD = new FormData();
+  //   const XHR = new XMLHttpRequest();
+  //   const object = {};
+  //   let json = {};
+  //   const firstname = document.getElementById('firstName');
+  //   const lastname = document.getElementById('lastName');
+  //   const password = document.getElementById('password');
+  //   const gender = document.getElementById('gender');
+  //   const email = document.getElementById('email');
 
-    FD.append('firstName', firstname.value);
-    FD.append('lastName', lastname.value);
-    FD.append('gender', gender.value);
-    FD.append('email', email.value);
-    FD.append('password', password.value);
-    XHR.addEventListener('load', (event) => {
-      alert(event.target.responseText);
-    });
-    XHR.addEventListener('error', () => {
-      alert('Oops! Something went wrong.');
-    });
-    XHR.open('POST', 'http://localhost:3000/signup', true);
-    XHR.setRequestHeader('Content-Type', 'application/json');
-    FD.forEach((value, key) => {
-      object[key] = value;
-    });
-    json = JSON.stringify(object);
-    XHR.send(json);
-  }
-  const form = document.getElementById('form');
-  form.addEventListener('submit', (event) => {
-    alert('test');
-    event.preventDefault();
-    sendData();
-  });
+  //   FD.append('firstName', firstname.value);
+  //   FD.append('lastName', lastname.value);
+  //   FD.append('gender', gender.value);
+  //   FD.append('email', email.value);
+  //   FD.append('password', password.value);
+  //   XHR.addEventListener('load', (event) => {
+  //     alert(event.target.responseText);
+  //   });
+  //   XHR.addEventListener('error', () => {
+  //     alert('Oops! Something went wrong.');
+  //   });
+  //   XHR.open('POST', 'http://localhost:3000/signup', true);
+  //   XHR.setRequestHeader('Content-Type', 'application/json');
+  //   FD.forEach((value, key) => {
+  //     object[key] = value;
+  //   });
+  //   json = JSON.stringify(object);
+  //   XHR.send(json);
+  // }
+  // const form = document.getElementById('form');
+  // form.addEventListener('submit', (event) => {
+  //   alert('test');
+  //   event.preventDefault();
+  //   sendData();
+  // });
 });
 
 function SignUp() {

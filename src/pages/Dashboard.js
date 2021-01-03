@@ -1,66 +1,63 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoins, faUniversity } from '@fortawesome/free-solid-svg-icons';
-import {
-  Chart, PieSeries, Title, Legend,
-} from '@devexpress/dx-react-chart-material-ui';
-import Paper from '@material-ui/core/Paper';
-import { Animation } from '@devexpress/dx-react-chart';
-import { Link } from 'react-router-dom';
-// import {
-//   schemePaired,
-// } from 'd3-scale-chromatic';
+import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import female from '../images/m1.jpg';
-import male from '../images/m2.jpg';
-import morpion from '../images/game.jpg';
-import stick from '../images/stick.png';
+import '../index.css';
 
-const data = [
-  { Status: 'draw', area: 10 },
-  { Status: 'lose', area: 24 },
-  { Status: 'win', area: 76 },
-];
-
-// const scheme = [
-//   schemePaired,
-// ];
+let socket;
+const CONNECTION_PORT = 'localhost:3000/';
 
 function Dashboard() {
-  const images = [morpion, stick];
-  const links = ['/morpion', '/stick'];
-  // const colors = [];
-  // scheme.map((color) => (
-  //   colors.push(color)
-  // ));
-  // const col = colors[0];
-  // const chartData = useState({ data });
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // Before Login
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [room, setRoom] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userList, setUserList] = useState([]);
 
-  function previous() {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    } else {
-      setCurrentSlide(images.length - 1);
-    }
-  }
+  // After Login
+  const [message, setMessage] = useState('');
+  const [messageList, setMessageList] = useState([]);
 
-  function next() {
-    if (currentSlide === images.length - 1) {
-      setCurrentSlide(0);
-    } else {
-      setCurrentSlide(currentSlide + 1);
-    }
-  }
+  useEffect(() => {
+    socket = io(CONNECTION_PORT);
+  }, [CONNECTION_PORT]);
 
-  function handleKeyDown(event) {
-    if (event.keyCode === 39) {
-      next();
-    } else if (event.keyCode === 37) {
-      previous();
-    }
-  }
+  useEffect(() => {
+    socket.on('receive_message', (data) => {
+      setMessageList([...messageList, data]);
+    });
+    socket.on('receive_user', (data) => {
+      setUserList([...userList, data]);
+    });
+  });
+  const connectToRoom = async () => {
+    const connection = {
+      room,
+      content: {
+        user: userName,
+        room,
+      },
+    };
+
+    setLoggedIn(true);
+    await socket.emit('join_room', connection);
+    setUserList([...userList, connection.content]);
+  };
+
+  const sendMessage = async () => {
+    const messageContent = {
+      room,
+      content: {
+        author: userName,
+        message,
+      },
+    };
+
+    await socket.emit('send_message', messageContent);
+    setMessageList([...messageList, messageContent.content]);
+    setMessage('');
+  };
 
   return (
     <div className="App">
@@ -68,78 +65,66 @@ function Dashboard() {
         <Header info="dash" gender="female" />
         <div className="page-wrapper">
           <div className="page-inner">
-            <section id="global-score">
-              <div className="coins">
-                <FontAwesomeIcon icon={faCoins} style={{ color: 'orange', marginRight: 10, fontSize: 30 }} />
-                <span>9000</span>
-              </div>
-              <div className="ranking">
-                <FontAwesomeIcon icon={faUniversity} style={{ color: 'grey', marginRight: 10, fontSize: 30 }} />
-                <span>9000</span>
-              </div>
-              <div className="game-history">
-                <span className="history">Game history</span>
-                <win className="win"> </win>
-                <lose className="lose"> </lose>
-                <win className="win"> </win>
-                <draw className="draw"> </draw>
-                <lose className="lose"> </lose>
-              </div>
-            </section>
-            <section id="main-infos">
-              <input type="text" name="pseudo" placeholder="Nickname" />
-              <div className="avatar">
-                <img src={female} alt="avatar" className="user-avatar" />
-              </div>
-              <div className="game-selector">
-                <div role="button" tabIndex={0} className="left-arrow" onClick={previous} onKeyDown={handleKeyDown}> </div>
-                <div className="games-wrapper">
-                  <img src={images[currentSlide]} alt="morpion game" className="game-img" />
+            {!loggedIn ? (
+              <div className="logIn">
+                <div className="inputs">
+                  <input
+                    type="text"
+                    placeholder="Name..."
+                    onChange={(e) => {
+                      setUserName(e.target.value);
+                    }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Room..."
+                    onChange={(e) => {
+                      setRoom(e.target.value);
+                    }}
+                  />
                 </div>
-                <div role="button" tabIndex={0} className="right-arrow" onClick={next} onKeyDown={handleKeyDown}> </div>
-                <div className="play-btn">
-                  <Link to={links[currentSlide]}>
-                    <input type="button" value="PLAY" />
-                  </Link>
+                <button type="button" onClick={connectToRoom}>Enter Chat</button>
+              </div>
+            ) : (
+              <div className="roomWrapper">
+                <div className="chatContainer">
+                  <div className="messages">
+                    {messageList.map((val) => (
+                      <div
+                        className="messageContainer"
+                        id={val.author === userName ? 'You' : 'Other'}
+                      >
+                        <div className="author">
+                          <img src={female} alt="avatar" className="user-avatar" />
+                          {val.author}
+                        </div>
+                        <div className="messageIndividual">
+                          {val.message}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="messageInputs">
+                    <input
+                      type="text"
+                      placeholder="Message..."
+                      value={message}
+                      onChange={(e) => {
+                        setMessage(e.target.value);
+                      }}
+                    />
+                    <button type="button" onClick={sendMessage}>Send</button>
+                  </div>
+                </div>
+                <div className="connectedUsers">
+                  {userList.map((val) => (
+                    <div className="user">
+                      {val.user}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </section>
-            <section id="stats">
-              <Paper>
-                <Chart data={data} width="400" height="400">
-                  <PieSeries valueField="area" argumentField="Status" color="color" />
-                  <Legend />
-                  <Title text="Total games stats" />
-                  <Animation />
-                </Chart>
-              </Paper>
-            </section>
-            <section id="friends">
-              <div className="connected">
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-              </div>
-              <div className="disconnected">
-                <img src={female} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={male} alt="friend" className="friend" />
-                <img src={female} alt="friend" className="friend" />
-              </div>
-            </section>
+            )}
           </div>
         </div>
         <Footer />
