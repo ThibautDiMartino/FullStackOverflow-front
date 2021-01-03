@@ -19,6 +19,10 @@ import en from '../images/uk.png';
 import fr from '../images/fr.png';
 
 function Header({ info, gender }) {
+  const { i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
   const { t } = useTranslation();
   const [drop, setDrop] = useState('');
   const [profile, setProfile] = useState('');
@@ -28,11 +32,20 @@ function Header({ info, gender }) {
   const [save, setSave] = useState('deactivate');
   const [settings, setSettings] = useState('');
 
+  function Language() {
+    return (
+      <li>
+        <button type="button" onClick={() => changeLanguage('fr')}>
+          <img src={fr} alt="fr flag" className="icon" />
+        </button>
+        <button type="button" onClick={() => changeLanguage('en')}>
+          <img src={en} alt="uk flag" className="icon" />
+        </button>
+      </li>
+    );
+  }
+
   function NotLoggedHeader() {
-    const { i18n } = useTranslation();
-    const changeLanguage = (lng) => {
-      i18n.changeLanguage(lng);
-    };
     return (
       <ul className="topnav">
         <li>
@@ -40,14 +53,7 @@ function Header({ info, gender }) {
             {t('home')}
           </Link>
         </li>
-        <li>
-          <button type="button" onClick={() => changeLanguage('fr')}>
-            <img src={fr} alt="fr flag" className="icon" />
-          </button>
-          <button type="button" onClick={() => changeLanguage('en')}>
-            <img src={en} alt="uk flag" className="icon" />
-          </button>
-        </li>
+        <Language />
         <li className="right">
           <Link to="/signup">{t('signup')}</Link>
         </li>
@@ -172,6 +178,7 @@ function Header({ info, gender }) {
             {t('home')}
           </Link>
         </li>
+        <Language />
         <li className="right">
           <button type="button" onClick={showDrop}>
             <img src={gender === 'female' ? female : male} alt="morpion game" className="user-icon" />

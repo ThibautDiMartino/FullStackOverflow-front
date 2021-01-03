@@ -26,14 +26,14 @@ function LogIn() {
       if (event.target.responseText === '[]') {
         setError('active');
       } else {
-        window.location.href = 'https://fullstackoverflow-back.herokuapp.com/dashboard';
+        window.location.href = 'https://localhost:3001/dashboard';
       }
       return event;
     });
     XHR.addEventListener('error', () => {
       setReqError('active');
     });
-    XHR.open('POST', 'https://fullstackoverflow-back.herokuapp.com/signin/login', true);
+    XHR.open('POST', 'https://localhost:3000/signin/login', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
     FD.forEach((value, key) => {
       object[key] = value;

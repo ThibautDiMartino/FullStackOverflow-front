@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import female from '../images/m1.jpg';
@@ -9,6 +10,7 @@ let socket;
 const CONNECTION_PORT = 'localhost:3000/';
 
 function Dashboard() {
+  const { t } = useTranslation();
   // Before Login
   const [loggedIn, setLoggedIn] = useState(false);
   const [room, setRoom] = useState('');
@@ -76,14 +78,14 @@ function Dashboard() {
                   <div className="inputs">
                     <input
                       type="text"
-                      placeholder="Name..."
+                      placeholder={t('name')}
                       onChange={(e) => {
                         setUserName(e.target.value);
                       }}
                     />
                     <input
                       type="text"
-                      placeholder="Room..."
+                      placeholder={t('room')}
                       value={room}
                       onChange={(e) => {
                         setRoom(e.target.value);
@@ -96,7 +98,7 @@ function Dashboard() {
                       setRoom(e.target.value);
                     }}
                   >
-                    <option selected>Existing Rooms</option>
+                    <option selected>{t('existing')}</option>
                     {rooms.map((element) => (
                       <option
                         value={element.room}
@@ -106,7 +108,7 @@ function Dashboard() {
                     ))}
                   </select>
 
-                  <button type="button" onClick={connectToRoom}>Enter Chat</button>
+                  <button type="button" onClick={connectToRoom}>{t('chat')}</button>
                 </div>
               </div>
             ) : (
@@ -137,7 +139,7 @@ function Dashboard() {
                         setMessage(e.target.value);
                       }}
                     />
-                    <button type="button" onClick={sendMessage}>Send</button>
+                    <button type="button" onClick={sendMessage}>{t('msg')}</button>
                   </div>
                 </div>
                 <div className="connectedUsers">
