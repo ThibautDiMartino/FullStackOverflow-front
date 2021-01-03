@@ -19,7 +19,6 @@ function LogIn() {
     FD.append('email', email.value);
     FD.append('password', password.value);
     XHR.addEventListener('load', (event) => {
-      alert(event.target.responseText);
       if (event.target.responseText === '[]') {
         alert(t('userFailed'));
       } else {

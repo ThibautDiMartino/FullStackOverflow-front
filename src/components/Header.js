@@ -10,6 +10,7 @@ import {
   faTimes,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { propTypes } from 'react-bootstrap/esm/Image';
 import female from '../images/m1.jpg';
 import male from '../images/m2.jpg';
 import pp from '../images/m7.jpg';
@@ -17,8 +18,7 @@ import po from '../images/po.jpg';
 import en from '../images/uk.png';
 import fr from '../images/fr.png';
 
-// eslint-disable-next-line
-function Header({info, gender}) {
+function Header({ info, gender }) {
   const { t } = useTranslation();
   const [drop, setDrop] = useState('');
   const [profile, setProfile] = useState('');
@@ -164,8 +164,7 @@ function Header({info, gender}) {
     );
   }
 
-  // eslint-disable-next-line
-  function LoggedHeader({gender}) {
+  function LoggedHeader() {
     return (
       <ul className="topnav">
         <li>
@@ -234,5 +233,10 @@ function Header({info, gender}) {
     </div>
   );
 }
+
+Header.propTypes = {
+  info: propTypes.isRequired,
+  gender: propTypes.isRequired,
+};
 
 export default Header;
