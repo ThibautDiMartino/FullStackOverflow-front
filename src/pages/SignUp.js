@@ -27,13 +27,13 @@ function SignUp() {
       if (event.target.responseText === '409: Already exists') {
         alert(t('userExists'));
       } else {
-        window.location.href = 'http://localhost:3001/dashboard';
+        window.location.href = 'https://fullstackoverflow-back.herokuapp.com/dashboard';
       }
     });
     XHR.addEventListener('error', () => {
       alert(t('requestError'));
     });
-    XHR.open('POST', 'http://localhost:3000/signup', true);
+    XHR.open('POST', 'https://fullstackoverflow-back.herokuapp.com/signup', true);
     XHR.setRequestHeader('Content-Type', 'application/json');
     FD.forEach((value, key) => {
       object[key] = value;
